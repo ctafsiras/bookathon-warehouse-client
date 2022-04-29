@@ -10,6 +10,7 @@ import Register from './components/Login/Register';
 import RequireAuth from './components/UtilityCompo/RequireAuth';
 import ManageInventories from './components/Inventory/ManageInventories';
 import AddInventoryItem from './components/Inventory/AddInventoryItem';
+import MyItems from './components/Inventory/MyItems';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path='/login' element={<Login></Login>}></Route>
         <Route path='/register' element={<Register></Register>}></Route>
         <Route path='/addItem' element={<AddInventoryItem></AddInventoryItem>}></Route>
+        <Route path='/myItems' element={<MyItems></MyItems>}></Route>
         <Route path='/inventories' element={<ManageInventories></ManageInventories>}></Route>
         <Route path='/inventory/:id' element={<RequireAuth><InventoryDetail></InventoryDetail></RequireAuth>}></Route>
       </Routes>
