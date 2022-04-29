@@ -1,22 +1,22 @@
-import React from 'react';
+import React, { Children } from 'react';
 import { Button, Card, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
-const InventoryCase = () => {
+const InventoryCase = ({ children, item }) => {
+    const { itemName, description, supplierName, imgURL, price, quantity } = item;
     return (
         <Col>
             <Card>
-                <Card.Img variant="top" src="holder.js/100px160" />
+                <Card.Img variant="top" src={imgURL} />
                 <Card.Body>
-                    <Card.Title>Itme Name</Card.Title>
-                    <Card.Text>
-                        lead-in to additional content. This content is a little bit longer.
-                    </Card.Text>
-                    <Card.Text>prcie</Card.Text>
-                    <Card.Text>quantity </Card.Text>
-                    <Card.Text>supplier name</Card.Text>
+                    <Card.Title>{itemName}</Card.Title>
+                    <Card.Text>{description}</Card.Text>
+                    <Card.Text>{price}</Card.Text>
+                    <Card.Text>{quantity} </Card.Text>
+                    <Card.Text>{supplierName}</Card.Text>
                 </Card.Body>
-                <Button as={Link} to='/inventory/sffs'>Manage</Button>
+                <Button variant='success' className='my-3' as={Link} to='/inventory/sffs'>Manage</Button>
+                {children}
             </Card>
         </Col>
     );

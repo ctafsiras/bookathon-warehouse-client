@@ -4,6 +4,7 @@ import { useAuthState, useSignInWithEmailAndPassword } from 'react-firebase-hook
 import { useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
 import Loading from '../UtilityCompo/Loading';
+import SocialLogin from './SocialLogin';
 
 const Login = () => {
     let navigate = useNavigate();
@@ -51,6 +52,7 @@ const Login = () => {
                     Submit
                 </Button>
             </Form>
+            <SocialLogin></SocialLogin>
         </div>
     );
 };
