@@ -16,6 +16,7 @@ const Header = () => {
                 </Navbar.Brand>
                 <Nav className="ms-auto">
                     <Nav.Link as={Link} to='/'>Home</Nav.Link>
+                    <Nav.Link as={Link} to='/blogs'>Blogs</Nav.Link>
                     {
                         user && <Nav.Link as={Link} to='/inventories'>Manage Inventories</Nav.Link>
                     }

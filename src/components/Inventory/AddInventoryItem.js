@@ -1,10 +1,15 @@
 import axios from 'axios';
 import React from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { useForm } from 'react-hook-form';
+import auth from '../../firebase.init';
 
 const AddInventoryItem = () => {
+    const [user]=useAuthState(auth);
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
+
     const onSubmit = data =>{
+        data.email=user.email;
         console.log(data)
         axios.post('http://localhost:4000/items', data)
         reset();

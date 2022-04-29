@@ -1,16 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
-import { useAuthState, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useAuthState, useSendPasswordResetEmail, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; 
 import auth from '../../firebase.init';
 import Loading from '../UtilityCompo/Loading';
 import SocialLogin from './SocialLogin';
 
 const Login = () => {
+    const [email, setEmail] = useState('');
     let navigate = useNavigate();
     let location = useLocation();
-
-  
     let from = location.state?.from?.pathname || "/";
     const [
         signInWithEmailAndPassword,
@@ -19,24 +20,31 @@ const Login = () => {
         error,
     ] = useSignInWithEmailAndPassword(auth);
     const handleLogin = e => {
-        e.preventDefault()
-        const email = e.target.email.value;
+        e.preventDefault();
+        setEmail(e.target.email.value);
         const password = e.target.password.value;
         signInWithEmailAndPassword(email, password)
-        
+
 
     }
+    const [sendPasswordResetEmail, sending, sendError] = useSendPasswordResetEmail(auth);
     if (user) {
         navigate(from, { replace: true });
     }
-
+    const sendResetCode = () => {
+        console.log(email);
+        sendPasswordResetEmail(email);
+        toast('Verification Email Sent!')
+    }
+    
     return (
 
         <div style={{ maxWidth: '400px' }} className='mx-auto'>
+            <ToastContainer></ToastContainer>
             <Form onSubmit={handleLogin}>
                 <Form.Group className="my-3">
 
-                    <Form.Control type="email" name='email' placeholder="Enter Email" required />
+                    <Form.Control onBlur={(e)=>setEmail(e.target.value)} type="email" name='email' placeholder="Enter Email" required />
 
                 </Form.Group>
 
@@ -52,6 +60,7 @@ const Login = () => {
                     Submit
                 </Button>
             </Form>
+            <p>Forget Password? <span className='text-primary' onClick={sendResetCode}>Reset Password</span></p>
             <SocialLogin></SocialLogin>
         </div>
     );

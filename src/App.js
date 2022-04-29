@@ -11,6 +11,8 @@ import RequireAuth from './components/UtilityCompo/RequireAuth';
 import ManageInventories from './components/Inventory/ManageInventories';
 import AddInventoryItem from './components/Inventory/AddInventoryItem';
 import MyItems from './components/Inventory/MyItems';
+import NotFound from './components/Pages/NotFound';
+import Blogs from './components/Pages/Blogs';
 
 function App() {
   return (
@@ -24,6 +26,8 @@ function App() {
         <Route path='/myItems' element={<MyItems></MyItems>}></Route>
         <Route path='/inventories' element={<ManageInventories></ManageInventories>}></Route>
         <Route path='/inventory/:id' element={<RequireAuth><InventoryDetail></InventoryDetail></RequireAuth>}></Route>
+        <Route path='/blogs' element={<Blogs></Blogs>}></Route>
+        <Route path='*' element={<NotFound></NotFound>}></Route>
       </Routes>
       <Footer></Footer>
     </div>

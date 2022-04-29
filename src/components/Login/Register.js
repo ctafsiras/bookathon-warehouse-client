@@ -1,17 +1,21 @@
 import React from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
 import Loading from '../UtilityCompo/Loading';
 import SocialLogin from './SocialLogin';
 
 const Register = () => {
+    let navigate = useNavigate();
+    let location = useLocation();
+    let from = location.state?.from?.pathname || "/";
     const [
         createUserWithEmailAndPassword,
         user,
         loading,
         error,
-    ] = useCreateUserWithEmailAndPassword(auth);
+    ] = useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
     const handleRegister = e => {
         e.preventDefault()
         const email = e.target.email.value;
@@ -20,11 +24,15 @@ const Register = () => {
 
         createUserWithEmailAndPassword(email, password);
 
-
     }
+    if (user) {
+        navigate(from, { replace: true });
+    }
+
     return (
 
         <div style={{ maxWidth: '400px' }} className='mx-auto'>
+
             <Form onSubmit={handleRegister}>
                 <Form.Group className="my-3">
                     <Form.Control type="text" name='name' placeholder="Enter Name" required />
@@ -43,6 +51,7 @@ const Register = () => {
                 </Button>
             </Form>
             <SocialLogin></SocialLogin>
+
         </div>
     );
 };

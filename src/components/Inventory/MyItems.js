@@ -1,13 +1,16 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Button, Row } from 'react-bootstrap';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link } from 'react-router-dom';
+import auth from '../../firebase.init';
 import InventoryCase from './InventoryCase';
 
 const MyItems = () => {
+    const [user]=useAuthState(auth)
     const [items, setItems] = useState([]);
     useEffect(() => {
-        axios.get('http://localhost:4000/items')
+        axios.get(`http://localhost:4000/myItems?email=${user.email}`)
             .then(data => setItems(data.data))
     })
     const handleDelete = (id) => {
