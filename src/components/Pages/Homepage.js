@@ -1,5 +1,6 @@
 import React from 'react';
-import { Card, Col, Row } from 'react-bootstrap';
+import { Button, Card, Col, Row } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import InventoryCase from '../Inventory/InventoryCase';
 import Banner from '../Shared/Banner';
 import CustomerReview from '../Shared/CustomerReview';
@@ -17,6 +18,7 @@ const Homepage = () => {
                     <Row xs={1} md={3} className="g-4">
                         {Array.from({ length: 6 }).map((_, idx) =><InventoryCase></InventoryCase> )}
                     </Row>
+                    <Link to='/inventories'><Button className='my-3' variant='dark'>Manage Inventories</Button></Link>
                 </div>
             </div>
             <WarehouseFeature></WarehouseFeature>
