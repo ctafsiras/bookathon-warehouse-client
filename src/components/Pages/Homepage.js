@@ -1,6 +1,8 @@
 import React from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
 import Banner from '../Shared/Banner';
+import Location from '../Shared/Location';
+import WarehouseFeature from '../Shared/WarehouseFeature';
 
 const Homepage = () => {
     return (
@@ -27,6 +29,8 @@ const Homepage = () => {
                     </Row>
                 </div>
             </div>
+            <WarehouseFeature></WarehouseFeature>
+            <Location></Location>
         </div>
     );
 };
