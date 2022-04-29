@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
+import Loading from '../UtilityCompo/Loading';
 
 const Register = () => {
     const [
@@ -34,7 +35,7 @@ const Register = () => {
                 <Form.Group className="mb-3">
                     <Form.Control type="password" name='password' placeholder="Password" required />
                 </Form.Group>
-                {loading && <p>Loading...</p>}
+                {loading && <Loading></Loading>}
                 {error && <p>{error.message}</p>}
                 <Button className='w-100' variant="dark" type="submit">
                     Register

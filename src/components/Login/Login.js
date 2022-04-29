@@ -1,9 +1,16 @@
 import React from 'react';
 import { Button, Form } from 'react-bootstrap';
-import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useAuthState, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
+import Loading from '../UtilityCompo/Loading';
 
 const Login = () => {
+    let navigate = useNavigate();
+    let location = useLocation();
+
+  
+    let from = location.state?.from?.pathname || "/";
     const [
         signInWithEmailAndPassword,
         user,
@@ -15,8 +22,13 @@ const Login = () => {
         const email = e.target.email.value;
         const password = e.target.password.value;
         signInWithEmailAndPassword(email, password)
+        
 
     }
+    if (user) {
+        navigate(from, { replace: true });
+    }
+
     return (
 
         <div style={{ maxWidth: '400px' }} className='mx-auto'>
@@ -33,7 +45,7 @@ const Login = () => {
                 </Form.Group>
 
 
-                {loading && <p>Loading...</p>}
+                {loading && <Loading></Loading>}
                 {error && <p>{error.message}</p>}
                 <Button className='w-100' variant="dark" type="submit">
                     Submit

@@ -7,6 +7,7 @@ import Footer from './components/Pages/Footer';
 import InventoryDetail from './components/Inventory/InventoryDetail';
 import Login from './components/Login/Login';
 import Register from './components/Login/Register';
+import RequireAuth from './components/UtilityCompo/RequireAuth';
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
         <Route path='/' element={<Homepage></Homepage>}></Route>
         <Route path='/login' element={<Login></Login>}></Route>
         <Route path='/register' element={<Register></Register>}></Route>
-        <Route path='/inventory/:id' element={<InventoryDetail></InventoryDetail>}></Route>
+        <Route path='/inventory/:id' element={<RequireAuth><InventoryDetail></InventoryDetail></RequireAuth>}></Route>
       </Routes>
       <Footer></Footer>
     </div>
