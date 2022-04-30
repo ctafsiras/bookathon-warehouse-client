@@ -27,7 +27,6 @@ const Login = () => {
         await signInWithEmailAndPassword(mail, password)
         const { data } = await axios.post('https://bookathon-warehouse-server.herokuapp.com/login', { mail });
         localStorage.setItem('accessToken', data.accessToken);
-        console.log(data);
         navigate(from, { replace: true });
 
     }
@@ -37,7 +36,6 @@ const Login = () => {
         // navigate(from, { replace: true });
     }
     const sendResetCode = () => {
-        console.log(email);
         sendPasswordResetEmail(email);
         toast('Verification Email Sent!')
     }

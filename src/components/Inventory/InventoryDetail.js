@@ -14,7 +14,6 @@ const InventoryDetail = () => {
     const handleDelivered = () => {
         axios.put(`https://bookathon-warehouse-server.herokuapp.com/items/${id}?quantity=${quantity - 1}`)
             .then(data => {
-                console.log(data.data);
                 const { quantity, ...rest } = item;
                 const newQnt = quantity - 1;
                 setItem({ newQnt, ...rest })
@@ -32,8 +31,6 @@ const InventoryDetail = () => {
                     const { quantity, ...rest } = item;
                     const newQnt = quantity + newStock;
                     setItem({ newQnt, ...rest })
-
-                    console.log(data)
                 })
 
             e.target.reset();

@@ -14,7 +14,6 @@ const ManageInventories = () => {
         const permission = window.confirm('Are You sure?')
         if (permission) {
             axios.delete(`https://bookathon-warehouse-server.herokuapp.com/deleteItems/${id}`)
-                .then(data => console.log(data))
         }
 
     }
