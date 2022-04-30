@@ -3,7 +3,7 @@ import { Button, Form } from 'react-bootstrap';
 import { useAuthState, useSendPasswordResetEmail, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css'; 
+import 'react-toastify/dist/ReactToastify.css';
 import auth from '../../firebase.init';
 import Loading from '../UtilityCompo/Loading';
 import SocialLogin from './SocialLogin';
@@ -21,9 +21,9 @@ const Login = () => {
     ] = useSignInWithEmailAndPassword(auth);
     const handleLogin = e => {
         e.preventDefault();
-        setEmail(e.target.email.value);
+        const mail = e.target.email.value;
         const password = e.target.password.value;
-        signInWithEmailAndPassword(email, password)
+        signInWithEmailAndPassword(mail, password)
 
 
     }
@@ -36,24 +36,18 @@ const Login = () => {
         sendPasswordResetEmail(email);
         toast('Verification Email Sent!')
     }
-    
+
     return (
 
         <div style={{ maxWidth: '400px' }} className='mx-auto'>
             <ToastContainer></ToastContainer>
             <Form onSubmit={handleLogin}>
                 <Form.Group className="my-3">
-
-                    <Form.Control onBlur={(e)=>setEmail(e.target.value)} type="email" name='email' placeholder="Enter Email" required />
-
+                    <Form.Control onBlur={(e) => setEmail(e.target.value)} type="email" name='email' placeholder="Enter Email" required />
                 </Form.Group>
-
                 <Form.Group className="mb-3">
-
                     <Form.Control type="password" name='password' placeholder="Password" required />
                 </Form.Group>
-
-
                 {loading && <Loading></Loading>}
                 {error && <p>{error.message}</p>}
                 <Button className='w-100' variant="dark" type="submit">

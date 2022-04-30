@@ -1,38 +1,51 @@
 import axios from 'axios';
 import React from 'react';
+import { Button, Form } from 'react-bootstrap';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { useForm } from 'react-hook-form';
 import auth from '../../firebase.init';
 
 const AddInventoryItem = () => {
-    const [user]=useAuthState(auth);
-    const { register, handleSubmit, reset, formState: { errors } } = useForm();
-
-    const onSubmit = data =>{
-        data.email=user.email;
-        console.log(data)
-        axios.post('http://localhost:4000/items', data)
-        reset();
-    };
-
-    
+    const [user] = useAuthState(auth);
+    const handleAddItem = e => {
+        e.preventDefault()
+        const itemName = e.target.name.value;
+        const description = e.target.description.value;
+        const supplierName = e.target.supplierName.value;
+        const price = e.target.price.value;
+        const quantity = e.target.quantity.value;
+        const imgURL = e.target.imgURL.value;
+        const email = user.email;
+        const data = { itemName, email, description, supplierName, price, quantity, imgURL };
+        axios.post('http://localhost:4000/items', data);
+        e.target.reset();
+    }
     return (
-        <div>
+        <div style={{ maxWidth: '400px' }} className="mx-auto">
             <h2>Add Inventory Item</h2>
-            <form onSubmit={handleSubmit(onSubmit)}>
-               
-                
-                <input placeholder='Name' {...register("itemName", { required: true })} /> <br />
-                <input placeholder='Supplier Name' {...register("supplierName", { required: true })} /><br />
-                <input type= "number" placeholder='Price' {...register("price", { required: true })} /><br />
-                <input type= "number" placeholder='Quantity' {...register("quantity", { required: true })} /><br />
-                <input placeholder='Img URL' {...register("imgURL", { required: true })} /><br />
-                <textarea placeholder='Description' {...register("description", { required: true })} /><br />
-                
-                {errors.exampleRequired && <span>This field is required</span>}
+            <Form onSubmit={handleAddItem}>
+                <Form.Group className="mb-3">
+                    <Form.Control name='name' type="text" placeholder="Enter Book Name" />
+                </Form.Group>
+                <Form.Group className="mb-3">
+                    <Form.Control name='description' as="textarea" rows={3} type="text" placeholder="Description" />
+                </Form.Group>
+                <Form.Group className="mb-3">
+                    <Form.Control name='supplierName' type="text" placeholder="Enter Supplier Name" />
+                </Form.Group>
+                <Form.Group className="mb-3">
+                    <Form.Control name='price' type="number" placeholder="Price" />
+                </Form.Group>
+                <Form.Group className="mb-3">
+                    <Form.Control name='quantity' type="number" placeholder="Enter Quantity" />
+                </Form.Group>
+                <Form.Group className="mb-3">
+                    <Form.Control name='imgURL' type="text" placeholder="Image URL" />
+                </Form.Group>
+                <Button variant="primary" type="submit">
+                    Submit
+                </Button>
+            </Form>
 
-                <input type="submit" />
-            </form>
         </div>
     );
 };

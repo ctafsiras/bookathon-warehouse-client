@@ -6,6 +6,7 @@ import InventoryCase from '../Inventory/InventoryCase';
 import Banner from '../Shared/Banner';
 import FAQ from '../Shared/FAQ';
 import WarehouseFeature from '../Shared/WarehouseFeature';
+import Loading from '../UtilityCompo/Loading';
 
 const Homepage = () => {
     const [items, setItems] = useState([]);
@@ -19,14 +20,18 @@ const Homepage = () => {
             <div>
                 <h2>Our Inventory</h2>
                 <div className='container'>
-                <Row xs={1} md={3} className="g-4">
+                {
+                    items[0]?
+                    <Row xs={1} md={3} className="g-4">
                     {
                         items.map(item => (
                             <InventoryCase key={item._id} item={item}>
                                 </InventoryCase>
                         ))
                     }
-                </Row>
+                </Row>:
+                <Loading></Loading>
+                }
                     <Link to='/inventories'><Button className='my-3' variant='dark'>Manage Inventories</Button></Link>
                 </div>
             </div>

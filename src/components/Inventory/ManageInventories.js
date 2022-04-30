@@ -32,9 +32,6 @@ console.log(id);
             </div>
 
             <Link to='/addItem'><Button className='my-3' variant='dark'>Add Item to Inventory</Button></Link>
-
-
-
         </div>
     );
 };
