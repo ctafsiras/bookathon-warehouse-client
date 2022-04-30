@@ -7,13 +7,18 @@ const InventoryDetail = () => {
     const { id } = useParams();
     const [item, setItem] = useState({});
     useEffect(() => {
-        axios.get(`http://localhost:4000/items/${id}`)
+        axios.get(`https://bookathon-warehouse-server.herokuapp.com/items/${id}`)
             .then(data => setItem(data.data[0]))
-    })
+    }, [item])
     const { _id, itemName, description, supplierName, imgURL, price, quantity } = item;
     const handleDelivered = () => {
-        axios.put(`http://localhost:4000/items/${id}?quantity=${quantity - 1}`)
-            .then(data => console.log(data))
+        axios.put(`https://bookathon-warehouse-server.herokuapp.com/items/${id}?quantity=${quantity - 1}`)
+            .then(data => {
+                console.log(data.data);
+                const { quantity, ...rest } = item;
+                const newQnt = quantity - 1;
+                setItem({ newQnt, ...rest })
+            })
     }
     const handleAddStock = (e) => {
         e.preventDefault();
@@ -21,8 +26,17 @@ const InventoryDetail = () => {
         if (newStock > 0) {
             const parseQuantity = parseInt(quantity);
             const newQuantity = newStock + parseQuantity;
-            axios.put(`http://localhost:4000/items/${id}?quantity=${newQuantity}`)
-                .then(data => console.log(data))
+            axios.put(`https://bookathon-warehouse-server.herokuapp.com/items/${id}?quantity=${newQuantity}`)
+                .then(data => {
+                    // if (data.data.modifiedCount<0) {
+                    const { quantity, ...rest } = item;
+                    const newQnt = quantity + newStock;
+                    setItem({ newQnt, ...rest })
+
+                    console.log(data)
+                })
+
+            e.target.reset();
         }
     }
     return (

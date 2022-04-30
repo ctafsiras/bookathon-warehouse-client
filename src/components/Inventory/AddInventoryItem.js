@@ -16,7 +16,7 @@ const AddInventoryItem = () => {
         const imgURL = e.target.imgURL.value;
         const email = user.email;
         const data = { itemName, email, description, supplierName, price, quantity, imgURL };
-        axios.post('http://localhost:4000/items', data);
+        axios.post('https://bookathon-warehouse-server.herokuapp.com/items', data);
         e.target.reset();
     }
     return (

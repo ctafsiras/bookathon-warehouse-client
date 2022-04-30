@@ -7,13 +7,15 @@ import InventoryCase from './InventoryCase';
 const ManageInventories = () => {
     const [items, setItems] = useState([]);
     useEffect(() => {
-        axios.get('http://localhost:4000/items')
+        axios.get('https://bookathon-warehouse-server.herokuapp.com/items')
             .then(data => setItems(data.data))
     })
     const handleDelete = (id) => {
-console.log(id);
-        axios.delete(`http://localhost:4000/deleteItems/${id}`)
-            .then(data => console.log(data))
+        const permission = window.confirm('Are You sure?')
+        if (permission) {
+            axios.delete(`https://bookathon-warehouse-server.herokuapp.com/deleteItems/${id}`)
+                .then(data => console.log(data))
+        }
 
     }
     return (

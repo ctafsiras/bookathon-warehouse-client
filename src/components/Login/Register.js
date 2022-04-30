@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
 import Loading from '../UtilityCompo/Loading';
 import SocialLogin from './SocialLogin';
@@ -46,10 +46,11 @@ const Register = () => {
                 </Form.Group>
                 {loading && <Loading></Loading>}
                 {error && <p>{error.message}</p>}
-                <Button className='w-100' variant="dark" type="submit">
+                <Button className='w-100 mb-3' variant="dark" type="submit">
                     Register
                 </Button>
             </Form>
+            <p>Already have account? <Link className='text-primary my-3' to='/login'>Login Now</Link></p>
             <SocialLogin></SocialLogin>
 
         </div>

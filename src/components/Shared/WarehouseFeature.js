@@ -18,10 +18,9 @@ const WarehouseFeature = () => {
                                 <Card>
                                     <Card.Img className='w-50 mx-auto py-3' variant="top" src={security} />
                                     <Card.Body>
-                                        <Card.Title>Card title</Card.Title>
+                                        <Card.Title>Super Security</Card.Title>
                                         <Card.Text>
-                                            This is a longer card with supporting text below as a natural
-                                            lead-in to additional content. This content is a little bit longer.
+                                            We provide in our warehouse the best security system with 24 hours in 7 days CC camera observation. so that your item be secure and safe in our warehouse.
                                         </Card.Text>
                                     </Card.Body>
                                 </Card>
@@ -30,10 +29,9 @@ const WarehouseFeature = () => {
                                 <Card>
                                     <Card.Img className='w-50 mx-auto py-3' variant="top" src={authentication} />
                                     <Card.Body>
-                                        <Card.Title>Card title</Card.Title>
+                                        <Card.Title>Authenticate</Card.Title>
                                         <Card.Text>
-                                            This is a longer card with supporting text below as a natural
-                                            lead-in to additional content. This content is a little bit longer.
+                                            Every personnel in our warehouse working is very secure and safe, their identiy always confirmed before every day working schedule. we keep your item safe from every evil probability.
                                         </Card.Text>
                                     </Card.Body>
                                 </Card>
@@ -42,10 +40,9 @@ const WarehouseFeature = () => {
                                 <Card>
                                     <Card.Img className='w-50 mx-auto py-3' variant="top" src={fastdelivery} />
                                     <Card.Body>
-                                        <Card.Title>Card title</Card.Title>
+                                        <Card.Title>Super Fast Delivery</Card.Title>
                                         <Card.Text>
-                                            This is a longer card with supporting text below as a natural
-                                            lead-in to additional content. This content is a little bit longer.
+                                            The biggest issue of Online shopping is delivery issue, though we are not eccomerce service, but for our client we always provide super fast delivery system.
                                         </Card.Text>
                                     </Card.Body>
                                 </Card>
