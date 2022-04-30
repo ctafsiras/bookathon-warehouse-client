@@ -28,6 +28,7 @@ const Login = () => {
         const {data} = await axios.post('http://localhost:4000/login', {mail});
         localStorage.setItem('accessToken', data.accessToken);
         console.log(data);
+        navigate(from, { replace: true });
 
     }
     const [sendPasswordResetEmail, sending, sendError] = useSendPasswordResetEmail(auth);

@@ -10,9 +10,16 @@ const MyItems = () => {
     const [user]=useAuthState(auth)
     const [items, setItems] = useState([]);
     useEffect(() => {
-        axios.get(`http://localhost:4000/myItems?email=${user.email}`)
-            .then(data => setItems(data.data))
-    })
+        const loadMyItems=async()=>{
+            const {data}=await axios.get(`http://localhost:4000/myItems?email=${user.email}`,{
+                headers:{
+                    authorization: `Bearer ${localStorage.getItem('accessToken')}`
+                }
+            })
+            setItems(data)
+        }
+        loadMyItems();
+    },[user])
     const handleDelete = (id) => {
         console.log(id);
         axios.delete(`http://localhost:4000/deleteItems/${id}`)
