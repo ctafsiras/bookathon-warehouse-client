@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useAuthState, useSendPasswordResetEmail, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
@@ -19,45 +20,48 @@ const Login = () => {
         loading,
         error,
     ] = useSignInWithEmailAndPassword(auth);
-    const handleLogin = e => {
+    const handleLogin = async e => {
         e.preventDefault();
         const mail = e.target.email.value;
         const password = e.target.password.value;
-        signInWithEmailAndPassword(mail, password)
-
+        await signInWithEmailAndPassword(mail, password)
+        const {data} = await axios.post('http://localhost:4000/login', {mail});
+        localStorage.setItem('accessToken', data.accessToken);
+        console.log(data);
 
     }
     const [sendPasswordResetEmail, sending, sendError] = useSendPasswordResetEmail(auth);
     if (user) {
-        navigate(from, { replace: true });
+     
+// navigate(from, { replace: true });
     }
-    const sendResetCode = () => {
-        console.log(email);
-        sendPasswordResetEmail(email);
-        toast('Verification Email Sent!')
-    }
+const sendResetCode = () => {
+    console.log(email);
+    sendPasswordResetEmail(email);
+    toast('Verification Email Sent!')
+}
 
-    return (
+return (
 
-        <div style={{ maxWidth: '400px' }} className='mx-auto'>
-            <ToastContainer></ToastContainer>
-            <Form onSubmit={handleLogin}>
-                <Form.Group className="my-3">
-                    <Form.Control onBlur={(e) => setEmail(e.target.value)} type="email" name='email' placeholder="Enter Email" required />
-                </Form.Group>
-                <Form.Group className="mb-3">
-                    <Form.Control type="password" name='password' placeholder="Password" required />
-                </Form.Group>
-                {loading && <Loading></Loading>}
-                {error && <p>{error.message}</p>}
-                <Button className='w-100' variant="dark" type="submit">
-                    Submit
-                </Button>
-            </Form>
-            <p>Forget Password? <span className='text-primary' onClick={sendResetCode}>Reset Password</span></p>
-            <SocialLogin></SocialLogin>
-        </div>
-    );
+    <div style={{ maxWidth: '400px' }} className='mx-auto'>
+        <ToastContainer></ToastContainer>
+        <Form onSubmit={handleLogin}>
+            <Form.Group className="my-3">
+                <Form.Control onBlur={(e) => setEmail(e.target.value)} type="email" name='email' placeholder="Enter Email" required />
+            </Form.Group>
+            <Form.Group className="mb-3">
+                <Form.Control type="password" name='password' placeholder="Password" required />
+            </Form.Group>
+            {loading && <Loading></Loading>}
+            {error && <p>{error.message}</p>}
+            <Button className='w-100' variant="dark" type="submit">
+                Submit
+            </Button>
+        </Form>
+        <p>Forget Password? <span className='text-primary' onClick={sendResetCode}>Reset Password</span></p>
+        <SocialLogin></SocialLogin>
+    </div>
+);
 };
 
 export default Login;
