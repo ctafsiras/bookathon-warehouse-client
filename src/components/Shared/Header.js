@@ -9,11 +9,13 @@ import logo from '../../images/logo/bookathon-warehouse-logo.png'
 const Header = () => {
     const [user] = useAuthState(auth)
     return (
-        <Navbar bg="light" variant="light">
+        <Navbar bg="light" variant="light" expand='lg'>
             <Container>
                 <Navbar.Brand className='me-auto' as={Link} to='/'>
                     <img src={logo} className='w-50 my-0' alt="" />
                 </Navbar.Brand>
+                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+    <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="ms-auto">
                     <Nav.Link as={Link} to='/'>Home</Nav.Link>
                     <Nav.Link as={Link} to='/blogs'>Blogs</Nav.Link>
@@ -33,6 +35,7 @@ const Header = () => {
                             <Nav.Link as={Link} to='/login'>Log In</Nav.Link>
                     }
                 </Nav>
+                </Navbar.Collapse>
             </Container>
         </Navbar>
     );

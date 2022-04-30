@@ -48,7 +48,7 @@ const Login = () => {
             <ToastContainer></ToastContainer>
             <Form onSubmit={handleLogin}>
                 <Form.Group className="my-3">
-                    <Form.Control onBlur={(e) => setEmail(e.target.value)} type="email" name='email' placeholder="Enter Email" required />
+                    <Form.Control  onBlur={(e) => setEmail(e.target.value)} type="email" name='email' placeholder="Enter Email" required />
                 </Form.Group>
                 <Form.Group className="mb-3">
                     <Form.Control type="password" name='password' placeholder="Password" required />
