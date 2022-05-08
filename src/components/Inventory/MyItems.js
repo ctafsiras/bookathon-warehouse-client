@@ -7,12 +7,15 @@ import { Link, Navigate, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
 import InventoryCase from './InventoryCase';
 
+
+// my item section where only show my items, none of other 
 const MyItems = () => {
     const [user] = useAuthState(auth)
     const [items, setItems] = useState([]);
     const navigate = useNavigate();
     useEffect(() => {
         const loadMyItems = async () => {
+            // handling my item along with jwt authorization 
             try {
                 const { data } = await axios.get(`https://bookathon-warehouse-server.herokuapp.com/myItems?email=${user.email}`, {
                     headers: {
@@ -29,6 +32,7 @@ const MyItems = () => {
         }
         loadMyItems();
     }, [user])
+    // handle data from my item also 
     const handleDelete = (id) => {
         const permission = window.confirm('Are You sure?')
         if (permission) {

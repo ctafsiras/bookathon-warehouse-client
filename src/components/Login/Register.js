@@ -6,6 +6,8 @@ import auth from '../../firebase.init';
 import Loading from '../UtilityCompo/Loading';
 import SocialLogin from './SocialLogin';
 
+
+// register user form and function 
 const Register = () => {
     let navigate = useNavigate();
     let location = useLocation();

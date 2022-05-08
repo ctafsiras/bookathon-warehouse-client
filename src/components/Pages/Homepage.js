@@ -9,6 +9,7 @@ import WarehouseFeature from '../Shared/WarehouseFeature';
 import Loading from '../UtilityCompo/Loading';
 
 const Homepage = () => {
+    //load 6 items in the homepage
     const [items, setItems] = useState([]);
     useEffect(() => {
         axios.get('https://bookathon-warehouse-server.herokuapp.com/items/6')

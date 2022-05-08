@@ -3,14 +3,19 @@ import React, { useEffect, useState } from 'react';
 import { Button, Card, Form, FormControl, InputGroup } from 'react-bootstrap';
 import { Link, useParams } from 'react-router-dom';
 
+// load data for inventory detail from params 
+
 const InventoryDetail = () => {
     const { id } = useParams();
     const [item, setItem] = useState({});
     useEffect(() => {
+        // axios data load by id 
         axios.get(`https://bookathon-warehouse-server.herokuapp.com/items/${id}`)
             .then(data => setItem(data.data[0]))
     }, [item])
     const { _id, itemName, description, supplierName, imgURL, price, quantity } = item;
+
+    // delivered item handle function 
     const handleDelivered = () => {
         axios.put(`https://bookathon-warehouse-server.herokuapp.com/items/${id}?quantity=${quantity - 1}`)
             .then(data => {
@@ -19,6 +24,8 @@ const InventoryDetail = () => {
                 setItem({ newQnt, ...rest })
             })
     }
+
+    // handle item when add to stock 
     const handleAddStock = (e) => {
         e.preventDefault();
         const newStock = parseInt(e.target.stock.value);

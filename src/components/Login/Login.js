@@ -9,6 +9,8 @@ import auth from '../../firebase.init';
 import Loading from '../UtilityCompo/Loading';
 import SocialLogin from './SocialLogin';
 
+
+// login function 
 const Login = () => {
     const [email, setEmail] = useState('');
     let navigate = useNavigate();
@@ -30,6 +32,7 @@ const Login = () => {
         navigate(from, { replace: true });
 
     }
+    // send reset pass function 
     const [sendPasswordResetEmail, sending, sendError] = useSendPasswordResetEmail(auth);
     if (user) {
 
@@ -37,6 +40,7 @@ const Login = () => {
     }
     const sendResetCode = () => {
         sendPasswordResetEmail(email);
+        // added a toast for reset email sending 
         toast('Verification Email Sent!')
     }
 

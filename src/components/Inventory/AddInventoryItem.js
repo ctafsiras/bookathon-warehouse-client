@@ -4,6 +4,8 @@ import { Button, Form } from 'react-bootstrap';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 
+// add item to inventory function
+
 const AddInventoryItem = () => {
     const [user] = useAuthState(auth);
     const handleAddItem = e => {
@@ -16,6 +18,9 @@ const AddInventoryItem = () => {
         const imgURL = e.target.imgURL.value;
         const email = user.email;
         const data = { itemName, email, description, supplierName, price, quantity, imgURL };
+
+// axios using for storing data in database trough api
+
         axios.post('https://bookathon-warehouse-server.herokuapp.com/items', data);
         e.target.reset();
     }

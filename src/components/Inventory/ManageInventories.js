@@ -4,12 +4,16 @@ import { Button, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import InventoryCase from './InventoryCase';
 
+// manage inventories section 
+
 const ManageInventories = () => {
     const [items, setItems] = useState([]);
     useEffect(() => {
         axios.get('https://bookathon-warehouse-server.herokuapp.com/items')
             .then(data => setItems(data.data))
     })
+
+    // handle delete from manage inventores 
     const handleDelete = (id) => {
         const permission = window.confirm('Are You sure?')
         if (permission) {
